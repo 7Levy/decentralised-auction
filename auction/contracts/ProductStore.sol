@@ -175,7 +175,3 @@ contract ProductStore{
     }
 
 }
-
-//ProductStore.deployed().then(function(i) {i.getProduct.call(1).then(function(f) {console.log(f)})})
-
-//ProductStore.deployed().then(function(i) {i.addProductToStore('iphone 6', 'Cell Phones & Accessories', 'imagelink', 'desclink', current_time, current_time + 200, amt_1, 0).then(function(f) {console.log(f)})});
