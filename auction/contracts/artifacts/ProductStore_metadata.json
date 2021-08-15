@@ -1,10 +1,56 @@
 {
 	"compiler": {
-		"version": "0.5.3+commit.10d17f24"
+		"version": "0.5.6+commit.b259423e"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "_productId",
+						"type": "uint256"
+					}
+				],
+				"name": "totalBids",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "_productId",
+						"type": "uint256"
+					}
+				],
+				"name": "highetBidderInfo",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					},
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
 			{
 				"constant": false,
 				"inputs": [
@@ -117,6 +163,51 @@
 				"type": "function"
 			},
 			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "_productId",
+						"type": "uint256"
+					},
+					{
+						"name": "_bid",
+						"type": "bytes32"
+					}
+				],
+				"name": "bid",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": true,
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "_productId",
+						"type": "uint256"
+					},
+					{
+						"name": "_amount",
+						"type": "string"
+					},
+					{
+						"name": "_secret",
+						"type": "string"
+					}
+				],
+				"name": "revealBid",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"payable": false,
 				"stateMutability": "nonpayable",
@@ -133,9 +224,9 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/ProductStore.sol": "ProductStore"
+			"auction/contracts/ProductStore.sol": "ProductStore"
 		},
-		"evmVersion": "byzantium",
+		"evmVersion": "petersburg",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,
@@ -144,10 +235,10 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/ProductStore.sol": {
-			"keccak256": "0x882b054062264c5e39e178910b05bc5f66a8c873ad4703b9478dea708138209e",
+		"auction/contracts/ProductStore.sol": {
+			"keccak256": "0x183dd8103599f1c347a148340a04ce09bd9b7bbf28c255a2344b598a6b3ff1f8",
 			"urls": [
-				"bzzr://019f21e13a703dc7288ed0091d18aed0a113ab0962885facb0319862e69131b6"
+				"bzzr://b501062d6f71469e1f55809bb544d6eda25fab3722aefda366ce02d3f8e59f21"
 			]
 		}
 	},
