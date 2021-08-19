@@ -3,7 +3,6 @@
 pragma solidity ^0.5.0;
 
 
-//receiver 0x0c1f1f7b6518216d7414bfeacfb15352f232e874
 
 
 /**
