@@ -202,6 +202,19 @@ contract ProductStore{
     function escrowAddressForProduct(uint _productId)public view resturns(address){
         return productEscrow[_productId];
     }
-    
+
+    function escrowInfo(uint _productId)public view returns(address,address,address,bool,uint,uint){
+        return Escrow(productEscrow[_productId]).escrowInfo();
+    }
+
+    //释放资金
+    function releaseAmountToSeller(uint _productId)public{
+        Escrow(productEscrow[_productId]).releaseAmountToSeller(msg.sender);
+    }
+
+    //退回资金
+    function refundAmountToBuyer(uint _productId)public{
+        Escrow(productEscrow[_productId]).refundAmountToBuyer(msg.sender);
+    }
 
 }
