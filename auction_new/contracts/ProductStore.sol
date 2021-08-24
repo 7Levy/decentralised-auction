@@ -5,6 +5,7 @@ pragma solidity ^0.5.0;
 
 //receiver 0x0c1f1f7b6518216d7414bfeacfb15352f232e874
 
+import "contracts/Escrow.sol"
 
 /**
  *产品相关的数据结构
@@ -26,6 +27,8 @@ contract ProductStore{
     //用户到产品的映射
     mapping(address => mapping(uint => Product)) stores;
     
+    //商品到托管合约的映射
+    mapping (uint => address) productEscrow;
     
     //商品信息
    struct Product {
@@ -174,4 +177,31 @@ contract ProductStore{
         return product.totalBids;
     }
     
+    
+    function finalizeAuction(uint _productId)public{
+        Product memory product = stores[productIdInstore[_productId][_productId]];
+        require(now > product.auctionEndTime);
+        require(product.status==ProductStatus.Open);
+        require(product.highestBidder !=msg.sender);
+        require(productIdInStore[_productId]!=msg.sender);
+
+        if(product.totalBids == 0){
+            product.status = ProductStatus.Unsold;
+        }else{
+            Escrow escrow = (new Escrow).value(product.secondHighestBid)(_productId,product.highestBidder,productIdInStore[_productId],msg.sender);
+            productEscrow[_productId] = address(escrow);
+            product.status = ProductStatus.Sold;
+
+            uint refund = product.highestBid - product.secondHighestBid;
+            product.highestBidder.transfer(refund);
+        }
+        stores[productIdInStore[_productId][_productId]]=product;
+
+    }
+
+    function escrowAddressForProduct(uint _productId)public view resturns(address){
+        return productEscrow[_productId];
+    }
+    
+
 }
